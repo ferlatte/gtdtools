@@ -1,0 +1,6 @@
+#! /bin/sh
+
+ls ~/Documents/Projects
+
+ls ~/Documents/Tacos/Projects
+
