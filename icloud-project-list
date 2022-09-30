@@ -1,6 +1,6 @@
 #! /bin/sh
 
-ls ~/Documents/Projects
+ls -1 ~/Documents/Projects
 
-ls ~/Documents/Tacos/Projects
+ls -1 ~/Documents/Tacos/Projects
 
