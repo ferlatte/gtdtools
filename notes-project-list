@@ -32,5 +32,5 @@ function run(argv) {
     names.push(f.name());
   }
   names.sort();
-  console.log(names.join("\n"));
+  return names.join("\n");
 }

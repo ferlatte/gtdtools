@@ -26,5 +26,5 @@ function run(argv) {
     projectNames.push(project.name());
   }
   projectNames.sort();
-  console.log(projectNames.join("\n"));
+  return projectNames.join("\n");
 }
