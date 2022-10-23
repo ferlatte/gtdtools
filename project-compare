@@ -1,0 +1,23 @@
+#! /bin/sh
+
+of_project_list=$(mktemp) || exit 1
+notes_project_list=$(mktemp) || exit 1
+icloud_project_list=$(mktemp) || exit 1
+gdrive_project_list=$(mktemp) || exit 1
+
+./omnifocus-project-list | sort > "$of_project_list"
+./notes-project-list | sort > "$notes_project_list"
+./icloud-project-list | sort > "$icloud_project_list"
+./gdrive-project-list | sort > "$gdrive_project_list"
+
+# NOTE: comm only has flags to *suppress* output; so, if you only
+# want the lines unique to file 2, you have to suppress columns 1 and 3.
+echo "**Notes**"
+comm -13 "$of_project_list" "$notes_project_list"
+echo
+echo "**iCloud**"
+comm -13 "$of_project_list" "$icloud_project_list"
+echo
+echo "**GDrive**"
+comm -13 "$of_project_list" "$gdrive_project_list"
+
