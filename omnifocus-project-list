@@ -8,6 +8,14 @@ function isProjectActive(project) {
   return project.status() === "active status";
 }
 
+function isProjectOnHold(project) {
+  return project.status() === "on hold status";
+}
+
+function isProjectAlive(project) {
+  return isProjectActive(project) || isProjectOnHold(project)
+}
+
 function run(argv) {
   let ofApp = Application("OmniFocus");
   if (! ofApp) {
@@ -20,7 +28,7 @@ function run(argv) {
   ofApp.strictParameterType = true;
   let doc = ofApp.defaultDocument();
   projects = doc.flattenedProjects();
-  activeProjects = projects.filter(isProjectActive);
+  activeProjects = projects.filter(isProjectAlive);
   let projectNames = [];
   for (let project of activeProjects) {
     projectNames.push(project.name());
