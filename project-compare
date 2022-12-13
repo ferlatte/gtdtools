@@ -20,4 +20,3 @@ comm -13 "$of_project_list" "$icloud_project_list"
 echo
 echo "**GDrive**"
 comm -13 "$of_project_list" "$gdrive_project_list"
-
