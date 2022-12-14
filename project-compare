@@ -5,8 +5,8 @@ notes_project_list=$(mktemp) || exit 1
 icloud_project_list=$(mktemp) || exit 1
 gdrive_project_list=$(mktemp) || exit 1
 
-./omnifocus-project-list | sort > "$of_project_list"
-./notes-project-list | sort > "$notes_project_list"
+./omnifocus-project-list.js | sort > "$of_project_list"
+./notes-project-list.js | sort > "$notes_project_list"
 ./icloud-project-list | sort > "$icloud_project_list"
 ./gdrive-project-list | sort > "$gdrive_project_list"
 
