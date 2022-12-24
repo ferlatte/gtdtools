@@ -1,7 +1,8 @@
 SHELL = /bin/bash
 PRE-COMMIT := $(shell which pre-commit)
 
-all: pre-commit .prereqs.stamp install
+run:
+	./project-compare
 
 # Shortcut to run pre-commit hooks over the entire repo.
 pre-commit: .git/hooks/pre-commit
