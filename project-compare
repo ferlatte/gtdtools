@@ -6,9 +6,9 @@ icloud_project_list=$(mktemp) || exit 1
 gdrive_project_list=$(mktemp) || exit 1
 
 ./omnifocus-project-list.js | sort > "$of_project_list"
-./notes-project-list.js | sort > "$notes_project_list"
+./list-notes.js -p | sort > "$notes_project_list"
 ./icloud-project-list | sort > "$icloud_project_list"
-./gdrive-project-list | sort > "$gdrive_project_list"
+./gdrive-project-list | sort -u > "$gdrive_project_list"
 
 # NOTE: comm only has flags to *suppress* output; so, if you only
 # want the lines unique to file 2, you have to suppress columns 1 and 3.

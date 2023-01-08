@@ -13,7 +13,28 @@ function findFolderNamed(app, name) {
   return undefined;
 }
 
+function parseArgv(argv) {
+  let config = {
+    projects: true,
+    areas: false
+  };
+  if (argv.length === 0) {
+    return config;
+  }
+  if (argv[0] === '-a') {
+    config.areas = true;
+    config.projects = false;
+  }
+  if (argv[0] === '-p') {
+    config.projects = true;
+    config.areas = false;
+  }
+  return config;
+}
+
 function run(argv) {
+  let config = parseArgv(argv);
+
   let notesApp = Application("Notes");
   if (! notesApp) {
     console.log("Couldn't find Notes");
@@ -23,8 +44,13 @@ function run(argv) {
   notesApp.strictPropertyScope = true;
   notesApp.strictCommandScope = true;
   notesApp.strictParameterType = true;
-
-  projectFolder = findFolderNamed(notesApp, "Projects");
+  let projectFolder = undefined;
+  if (config.projects) {
+    projectFolder = findFolderNamed(notesApp, "Projects");
+  }
+  if (config.areas) {
+    projectFolder = findFolderNamed(notesApp, "Areas of Focus");
+  }
   let names = [];
   let projectFolders = projectFolder.folders();
   for (let i = 0; i < projectFolders.length; i += 1) {
