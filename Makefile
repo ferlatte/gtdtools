@@ -3,6 +3,7 @@ PRE-COMMIT := $(shell which pre-commit)
 
 run:
 	./project-compare
+	./area-compare
 
 # Shortcut to run pre-commit hooks over the entire repo.
 pre-commit: .git/hooks/pre-commit
@@ -15,4 +16,4 @@ pre-commit: .git/hooks/pre-commit
 clean:
 	rm -f .*.stamp
 
-.PHONY: all clean pre-commit
+.PHONY: all clean

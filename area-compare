@@ -1,0 +1,17 @@
+#! /bin/sh
+
+notes_area_list=$(mktemp) || exit 1
+icloud_area_list=$(mktemp) || exit 1
+gdrive_area_list=$(mktemp) || exit 1
+
+./list-notes.js -p | sort > "$notes_area_list"
+./icloud-area-list | sort > "$icloud_area_list"
+./gdrive-area-list | sort -u > "$gdrive_area_list"
+
+# NOTE: comm only has flags to *suppress* output; so, if you only
+# want the lines unique to file 2, you have to suppress columns 1 and 3.
+echo "**iCloud**"
+comm -13 "$notes_area_list" "$icloud_area_list"
+echo
+echo "**GDrive**"
+comm -13 "$notes_area_list" "$gdrive_area_list"
