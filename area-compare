@@ -5,7 +5,7 @@ icloud_area_list=$(mktemp) || exit 1
 gdrive_area_list=$(mktemp) || exit 1
 
 ./list-notes.js -a | sort > "$notes_area_list"
-./icloud-area-list | sort > "$icloud_area_list"
+./icloud-area-list | sort -u > "$icloud_area_list"
 ./gdrive-area-list | sort -u > "$gdrive_area_list"
 
 # NOTE: comm only has flags to *suppress* output; so, if you only
