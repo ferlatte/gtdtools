@@ -4,7 +4,7 @@ notes_area_list=$(mktemp) || exit 1
 icloud_area_list=$(mktemp) || exit 1
 gdrive_area_list=$(mktemp) || exit 1
 
-./list-notes.js -p | sort > "$notes_area_list"
+./list-notes.js -a | sort > "$notes_area_list"
 ./icloud-area-list | sort > "$icloud_area_list"
 ./gdrive-area-list | sort -u > "$gdrive_area_list"
 
