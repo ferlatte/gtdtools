@@ -16,7 +16,48 @@ function isProjectAlive(project) {
   return isProjectActive(project) || isProjectOnHold(project)
 }
 
+function getAreaNames(doc) {
+  let folders = doc.flattenedFolders();
+  let areaFolder = folders.find(f => f.name() === "Areas of Focus");
+  let areaNames = [];
+  let projects = areaFolder.flattenedProjects();
+  for (let project of projects) {
+    areaNames.push(project.name());
+  }
+  return areaNames;
+}
+
+function getActiveProjectNames(doc) {
+  let projects = doc.flattenedProjects();
+  let activeProjects = projects.filter(isProjectActive);
+  let projectNames = [];
+  for (let project of activeProjects) {
+    projectNames.push(project.name());
+  }
+  return projectNames;
+}
+
+function parseArgv(argv) {
+  let config = {
+    projects: true,
+    areas: false
+  };
+  if (argv.length === 0) {
+    return config;
+  }
+  if (argv[0] === '-a') {
+    config.areas = true;
+    config.projects = false;
+  }
+  if (argv[0] === '-p') {
+    config.areas = false;
+    config.projects = true;
+  }
+  return config;
+}
+
 function run(argv) {
+  let config = parseArgv(argv);
   let ofApp = Application("OmniFocus");
   if (! ofApp) {
     console.log("Couldn't find OmniFocus");
@@ -27,12 +68,16 @@ function run(argv) {
   ofApp.strictCommandScope = true;
   ofApp.strictParameterType = true;
   let doc = ofApp.defaultDocument();
-  projects = doc.flattenedProjects();
-  activeProjects = projects.filter(isProjectAlive);
-  let projectNames = [];
-  for (let project of activeProjects) {
-    projectNames.push(project.name());
+
+  let names = [];
+  let areaNames = getAreaNames(doc);
+  let projectNames = getActiveProjectNames(doc);
+    if (config.projects) {
+      names = projectNames.filter(n => ! areaNames.includes(n));
   }
-  projectNames.sort();
-  return projectNames.join("\n");
+  if (config.areas) {
+    names = areaNames;
+  }
+  names.sort();
+  return names.join("\n");
 }
