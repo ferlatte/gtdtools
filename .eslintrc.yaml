@@ -1,3 +1,4 @@
 env:
-  applescript: true
   es6: true
+  applescript: true
+extends: "eslint:recommended"

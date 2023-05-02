@@ -8,14 +8,6 @@ function isProjectActive(project) {
   return project.status() === "active status";
 }
 
-function isProjectOnHold(project) {
-  return project.status() === "on hold status";
-}
-
-function isProjectAlive(project) {
-  return isProjectActive(project) || isProjectOnHold(project)
-}
-
 function getAreaNames(doc) {
   let folders = doc.flattenedFolders();
   let areaFolder = folders.find(f => f.name() === "Areas of Focus");
@@ -56,6 +48,7 @@ function parseArgv(argv) {
   return config;
 }
 
+/* exported run */
 function run(argv) {
   let config = parseArgv(argv);
   let ofApp = Application("OmniFocus");

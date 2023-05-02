@@ -1,17 +1,22 @@
 #! /bin/sh
 
+omnifocus_area_list=$(mktemp) || exit 1
 notes_area_list=$(mktemp) || exit 1
 icloud_area_list=$(mktemp) || exit 1
 gdrive_area_list=$(mktemp) || exit 1
 
+./list-omnifocus.js -a | sort > "$omnifocus_area_list"
 ./list-notes.js -a | sort > "$notes_area_list"
 ./icloud-area-list | sort -u > "$icloud_area_list"
 ./gdrive-area-list | sort -u > "$gdrive_area_list"
 
 # NOTE: comm only has flags to *suppress* output; so, if you only
 # want the lines unique to file 2, you have to suppress columns 1 and 3.
+echo "**Notes**"
+comm -13 "$omnifocus_area_list" "$notes_area_list"
+echo
 echo "**iCloud**"
-comm -13 "$notes_area_list" "$icloud_area_list"
+comm -13 "$omnifocus_area_list" "$icloud_area_list"
 echo
 echo "**GDrive**"
-comm -13 "$notes_area_list" "$gdrive_area_list"
+comm -13 "$omnifocus_area_list" "$gdrive_area_list"

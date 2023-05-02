@@ -32,6 +32,7 @@ function parseArgv(argv) {
   return config;
 }
 
+/* exported run */
 function run(argv) {
   let config = parseArgv(argv);
 
@@ -54,7 +55,7 @@ function run(argv) {
   let names = [];
   let projectFolders = projectFolder.folders();
   for (let i = 0; i < projectFolders.length; i += 1) {
-    f = projectFolders[i];
+    let f = projectFolders[i];
     names.push(f.name());
   }
   names.sort();
