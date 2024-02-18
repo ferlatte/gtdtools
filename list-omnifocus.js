@@ -8,6 +8,14 @@ function isProjectActive(project) {
   return project.status() === "active status";
 }
 
+function isProjectPaused(project) {
+  return project.status() === "on hold status";
+}
+
+function isProjectPausedOrActive(project) {
+  return isProjectPaused(project) || isProjectActive(project);
+}
+
 function getAreaNames(doc) {
   let folders = doc.flattenedFolders();
   let areaFolder = folders.find(f => f.name() === "Areas of Focus");
@@ -19,11 +27,18 @@ function getAreaNames(doc) {
   return areaNames;
 }
 
-function getActiveProjectNames(doc) {
+function getActiveProjects(doc) {
   let projects = doc.flattenedProjects();
-  let activeProjects = projects.filter(isProjectActive);
+  return projects.filter(isProjectActive);
+}
+
+function getActiveOrPausedProjects(doc) {
+  let projects = doc.flattenedProjects();
+  return projects.filter(isProjectPausedOrActive);
+}
+function getProjectNames(projects) {
   let projectNames = [];
-  for (let project of activeProjects) {
+  for (let project of projects) {
     projectNames.push(project.name());
   }
   return projectNames;
@@ -64,7 +79,7 @@ function run(argv) {
 
   let names = [];
   let areaNames = getAreaNames(doc);
-  let projectNames = getActiveProjectNames(doc);
+  let projectNames = getProjectNames(getActiveOrPausedProjects(doc));
     if (config.projects) {
       names = projectNames.filter(n => ! areaNames.includes(n));
   }
