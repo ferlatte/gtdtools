@@ -17,7 +17,7 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.0.0-beta.2
+    rev: v9.0.0-rc.0
     hooks:
       - id: eslint
   - repo: https://github.com/shellcheck-py/shellcheck-py
