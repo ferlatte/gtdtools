@@ -1,5 +1,7 @@
 #! /bin/sh
 
-ls -1 ~/Documents/Projects
-
-ls -1 ~/Documents/Tacos/Projects
+tmpname=$(basename "$0")
+tmpfile=$(mktemp -t "$tmpname") || exit 1
+ls -1 ~/Documents/Projects >> "$tmpfile"
+ls -1 ~/Documents/Tacos/Projects >> "$tmpfile"
+sort -u "$tmpfile"

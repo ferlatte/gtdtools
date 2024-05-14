@@ -16,10 +16,6 @@ repos:
       - id: fix-byte-order-marker
       - id: mixed-line-ending
       - id: trailing-whitespace
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.2.0
-    hooks:
-      - id: eslint
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.10.0.1
     hooks:
