@@ -1,3 +1,8 @@
 #! /bin/sh
 
-ls -1 "${HOME}/Google Drive/My Drive/Projects"
+set -eu
+
+if [ -d "${HOME}/Google Drive" ]; then
+    ls -1 "${HOME}/Google Drive/My Drive/Projects"
+fi
+

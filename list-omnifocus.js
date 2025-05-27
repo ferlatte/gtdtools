@@ -18,11 +18,13 @@ function isProjectPausedOrActive(project) {
 
 function getAreaNames(doc) {
   let folders = doc.flattenedFolders();
-  let areaFolder = folders.find(f => f.name() === "Areas of Focus");
+  let areaFolders = folders.filter(f => f.name() === "Areas of Focus");
   let areaNames = [];
-  let projects = areaFolder.flattenedProjects();
-  for (let project of projects) {
-    areaNames.push(project.name());
+  for (let areaFolder of areaFolders) {
+    let projects = areaFolder.flattenedProjects();
+    for (let project of projects) {
+      areaNames.push(project.name());
+    }
   }
   return areaNames;
 }
