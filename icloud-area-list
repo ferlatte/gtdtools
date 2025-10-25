@@ -1,5 +1,5 @@
 #! /bin/sh
 
-ls -1 "${HOME}/Documents/Areas of Focus"
+ls -1 "${HOME}/Documents/Personal/Areas of Focus"
 
 ls -1 "${HOME}/Documents/Tacos/Areas of Focus"

@@ -2,6 +2,6 @@
 
 tmpname=$(basename "$0")
 tmpfile=$(mktemp -t "$tmpname") || exit 1
-ls -1 ~/Documents/Projects >> "$tmpfile"
+ls -1 ~/Documents/Personal/Projects >> "$tmpfile"
 ls -1 ~/Documents/Tacos/Projects >> "$tmpfile"
 sort -u "$tmpfile"
