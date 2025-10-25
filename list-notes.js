@@ -1,8 +1,8 @@
 #! /usr/bin/osascript -l JavaScript
 // -*- mode: JavaScript -*-
 
-function findFolderNamed(app, name) {
-  let folders = app.folders();
+function findFolderNamed(app_or_folder, name) {
+  let folders = app_or_folder.folders();
   // I don't know why for (let x of folders) doesn't work, but it doesn't.
   // Need to explicitly index the folders array.
   for (let i = 0; i < folders.length; i += 1) {
@@ -45,17 +45,20 @@ function run(argv) {
   notesApp.strictPropertyScope = true;
   notesApp.strictCommandScope = true;
   notesApp.strictParameterType = true;
-  let projectFolder = undefined;
+  let personalFolder = undefined;
+  personalFolder = findFolderNamed(notesApp, "Personal")
+
+  let srcFolder = undefined;
   if (config.projects) {
-    projectFolder = findFolderNamed(notesApp, "Projects");
+    srcFolder = findFolderNamed(personalFolder, "Projects");
   }
   if (config.areas) {
-    projectFolder = findFolderNamed(notesApp, "Areas of Focus");
+    srcFolder = findFolderNamed(personalFolder, "Areas of Focus");
   }
   let names = [];
-  let projectFolders = projectFolder.folders();
-  for (let i = 0; i < projectFolders.length; i += 1) {
-    let f = projectFolders[i];
+  let srcFolders = srcFolder.folders();
+  for (let i = 0; i < srcFolders.length; i += 1) {
+    let f = srcFolders[i];
     names.push(f.name());
   }
   names.sort();
